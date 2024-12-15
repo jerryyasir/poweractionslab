@@ -1,0 +1,162 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "itd_CON_REF_OUTLOOK_EIPApp"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      },
+      "shared_sharepointonline_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "itd_CON_REF_SPO_EIPApp"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "ENV_VAR_LIST_EmployeeInProcessingCheckList (itd_shared_sharepointonline_112beddc77d24f78ae6062722ea691f6)": {
+          "defaultValue": "78bd6958-92f8-4d95-bc4a-a7cda83cd94a",
+          "type": "String",
+          "metadata": {
+            "schemaName": "itd_shared_sharepointonline_112beddc77d24f78ae6062722ea691f6"
+          }
+        },
+        "ENV_VAR_SPO_ITD (itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d)": {
+          "defaultValue": "https://doj365.sharepoint.us/sites/OIG-Forms/ITD",
+          "type": "String",
+          "metadata": {
+            "schemaName": "itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d"
+          }
+        },
+        "ENV_VAR_Text_AppURL (itd_ENV_VAR_Text_AppURL)": {
+          "defaultValue": "https://apps.high.powerapps.us/play/e/c482f3b7-135f-428e-8a3c-bf02bc95294d/a/0c3c0ab5-b57c-4fca-8962-768b9a51c517?tenantId=15ef12a1-af58-44c4-b029-712fc0605570&hint=6a8c2752-720a-47ce-8f67-6c6abf5e7bee&sourcetime=1719346793781",
+          "type": "String",
+          "metadata": {
+            "schemaName": "itd_ENV_VAR_Text_AppURL"
+          }
+        }
+      },
+      "triggers": {
+        "When_an_item_is_created": {
+          "recurrence": {
+            "interval": 1,
+            "frequency": "Minute"
+          },
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "metadata": {
+            "operationMetadataId": "5323dd44-59e5-4f27-a2bc-cc9c1d4336ef"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_sharepointonline_1",
+              "operationId": "GetOnNewItems",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+            },
+            "parameters": {
+              "dataset": "@parameters('ENV_VAR_SPO_ITD (itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d)')",
+              "table": "@parameters('ENV_VAR_LIST_EmployeeInProcessingCheckList (itd_shared_sharepointonline_112beddc77d24f78ae6062722ea691f6)')"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "var_EmailAddresses": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "49d2e2c2-90df-4e16-be69-451259753904"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "var_EmailAddresses",
+                "type": "string",
+                "value": "@{triggerBody()?['Supervisor']?['Email']};"
+              }
+            ]
+          }
+        },
+        "Compose": {
+          "runAfter": {
+            "var_EmailAddresses": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5c860cb8-96c6-4f93-8b8a-15ceedf81e9f"
+          },
+          "type": "Compose",
+          "inputs": "<!DOCTYPE html>\n<html lang=\"en\" dir=\"ltr\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\"\n    style=\"color-scheme:light dark;supported-color-schemes:light dark;\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1 user-scalable=yes\">\n    <meta name=\"format-detection\" content=\"telephone=no, date=no, address=no, email=no, url=no\">\n    <meta name=\"x-apple-disable-message-reformatting\">\n    <meta name=\"color-scheme\" content=\"light dark\">\n    <meta name=\"supported-color-schemes\" content=\"light dark\">\n    <title></title>\n    <!--[if mso]> <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>\n    <![endif]-->\n    <!--[if mso]>\n    <style>table,tr,td,p,span,a{mso-line-height-rule:exactly !important;line-height:120% !important;mso-table-lspace:0 !important;mso-table-rspace:0 !important;}.mso-padding{padding-top:20px !important;padding-bottom:20px !important;}\n    </style>\n    <![endif]-->\n    <style>\n        a[x-apple-data-detectors] {\n            color: inherit !important;\n            text-decoration: none !important;\n            font-size: inherit !important;\n            font-family: inherit !important;\n            font-weight: inherit !important;\n            line-height: inherit !important;\n        }\n\n        u+#body a {\n            color: inherit !important;\n            text-decoration: none !important;\n            font-size: inherit !important;\n            font-family: inherit !important;\n            font-weight: inherit !important;\n            line-height: inherit !important;\n        }\n\n        #MessageViewBody a {\n            color: inherit !important;\n            text-decoration: none !important;\n            font-size: inherit !important;\n            font-family: inherit !important;\n            font-weight: inherit !important;\n            line-height: inherit !important;\n        }\n\n        :root {\n            color-scheme: light dark;\n            supported-color-schemes: light dark;\n        }\n\n        tr {\n            vertical-align: middle;\n        }\n\n        p,\n        a,\n        li {\n            color: #000000;\n            font-size: 16px;\n            mso-line-height-rule: exactly;\n            line-height: 24px;\n            font-family: Arial, sans-serif;\n        }\n\n        p:first-child {\n            margin-top: 0 !important;\n        }\n\n        p:last-child {\n            margin-bottom: 0 !important;\n        }\n\n        a {\n            text-decoration: underline;\n            font-weight: bold;\n            color: #0000ff\n        }\n\n        .alert p {\n            vertical-align: top;\n            color: #fff;\n            font-weight: 500;\n            text-align: center;\n            border-radius: 3px 3px 0 0;\n            background-color: #FF9F00;\n            margin: 0;\n            padding: 20px;\n        }\n\n        @media only screen and (max-width:599px) {\n            .full-width-mobile {\n                width: 100% !important;\n                height: auto !important;\n            }\n\n            .mobile-padding {\n                padding-left: 10px !important;\n                padding-right: 10px !important;\n            }\n\n            .mobile-stack {\n                display: block !important;\n                width: 100% !important;\n            }\n        }\n\n        @media (prefers-color-scheme:dark) {\n\n            body,\n            div,\n            table,\n            td {\n                background-color: #000000 !important;\n                color: #ffffff !important;\n            }\n\n            .content {\n                background-color: #222222 !important;\n            }\n\n            p,\n            li,\n            .white-text {\n                color: #B3BDC4 !important;\n            }\n\n            a {\n                color: #84cfe2 !important;\n            }\n\n            a span,\n            .alert-dark p {\n                color: #ffffff !important;\n            }\n        }\n    </style>\n</head>\n\n<body class=\"body\" style=\"background-color:#f4f4f4;\">\n    <div\n        style=\"display:none;font-size:1px;color:#f4f4f4;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\">\n    </div> <span\n        style=\"display:none!important;visibility:hidden;mso-hide:all;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\">\n        &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</span>\n    <div role=\"article\" aria-roledescription=\"email\" aria-label=\"Your Email\" lang=\"en\" dir=\"ltr\"\n        style=\"font-size:16px;font-size:1rem;font-size:max(16px,1rem);background-color:#f4f4f4;\">\n        <table align=\"center\" role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"\n            style=\"border-collapse:collapse;max-width:600px;width:100%;background-color:#f4f4f4;\">\n            <tr style=\"vertical-align:middle;\" valign=\"middle\">\n                <td>\n                    <!--[if mso]>\n                    <table align=\"center\" role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"border-collapse:collapse;\"><tr><td align=\"center\">\n                    <!--<![endif]-->\n                </td>\n            </tr>\n\n            <tr style=\"vertical-align:middle;\" valign=\"middle\">\n                <td align=\"center\">\n                    <table align=\"center\" role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\"\n                        style=\"border-collapse:collapse;max-width:600px;width:100%;background-color:#fffffe;\">\n\n                        <tr style=\"mso-yfti-irow: 0; mso-yfti-firstrow: yes;\">\n                            <td>\n                                <table align=\"center\" role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"\n                                    width=\"600\" style=\"border-collapse:collapse;max-width:600px;width:100%;\">\n                                    <tr style=\"vertical-align:middle;\" valign=\"middle\">\n                                        <td colspan=\"4\" style=\"padding: 0pt; width: auto; height: auto;\">\n                                            <p class=\"MsoNormal\">\n                                                <span\n                                                    style=\" font-size: 9.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: 'Times New Roman'; \">\n                                                    <img id=\"_x0000_i1025\"\n                                                        src=\"https://oneoig.oig.doj.gov/SiteAssets/ITDBanner.png\"\n                                                        alt=\"ITD\" border=\"0\" width=\"100%\" height=\"100%\" />\n                                                    <o:p></o:p>\n                                                </span>\n                                            </p>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </td>\n                        </tr>\n                        <tr style=\"vertical-align:middle;\" valign=\"middle\">\n                            <td>\n                                <table align=\"center\" role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"\n                                    width=\"600\" style=\"border-collapse:collapse;max-width:600px;width:100%;\">\n                                    <tr style=\"vertical-align:middle;\" valign=\"middle\">\n                                        <td class=\"mso-padding alert alert-warning alert-dark\" align=\"center\"\n                                            bgcolor=\"#FF9F00\" valign=\"top\">\n                                            <p\n                                                style=\"font-size:16px;mso-line-height-rule:exactly;line-height:24px;font-family:Arial,sans-serif;vertical-align:top;color:#fff;font-weight:500;text-align:center;border-radius:3px 3px 0 0;background-color:#FF9F00;margin:0;padding:20px;margin-top:0!important;margin-bottom:0!important;\">\n                                                New Employee is added to Employee CheckList App.\n                                            </p>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </td>\n                        </tr>\n                        <tr\n                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                            <td class=\"content-wrap\"\n                                style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;\"\n                                valign=\"top\">\n                                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"\n                                    style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;\"\n                                            valign=\"top\" align=\"left\" colspan=\"2\">\n                                            A new employee who will report to you has been added to Employee Checklist\n                                            app. Please review the item and fill up the checklist information using the\n                                            App link below. You can view the details below:<br />\n                                        </td>\n\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Created By:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 5px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/Author/DisplayName']}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Employee Name:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 5px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/Name']}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Duty Location:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 5px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/DutyLocation']}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Created Date:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 5px;\"\n                                            valign=\"top\" align=\"left\">\n@{formatDateTime(triggerOutputs()?['body/Created'], 'mm/dd/yyyy')}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Employee On Duty Date:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 5px;\"\n                                            valign=\"top\" align=\"left\">\n@{formatDateTime(triggerOutputs()?['body/EntryOnDutyDate'], 'mm/dd/yyyy')}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Division:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/Division']}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Official OPM Title:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/Position']}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Organization Title:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/OrganizationTitle']}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Office:<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/Office']}\n                                            <br />\n                                        </td>\n                                    </tr>\n                                    <tr\n                                        style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\">\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: bold; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\">\n                                            Supervisor (Name and Email):<br />\n                                        </td>\n                                        <td class=\"content-block\"\n                                            style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 0px;\"\n                                            valign=\"top\" align=\"left\">\n@{triggerOutputs()?['body/Supervisor/DisplayName']} (@{triggerOutputs()?['body/Supervisor/Email']})\n                                            <br />\n                                        </td>\n                                    </tr>\n                        </tr>\n                    </table>\n                </td>\n\n            </tr>\n            <tr style=\"vertical-align:middle;\" valign=\"middle\">\n                <td align=\"center\">\n                    <table align=\"center\" role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\"\n                        style=\"border-collapse:collapse;max-width:600px;width:100%;background-color:#fffffe;\">\n                        <tr style=\"vertical-align:middle;\" valign=\"middle\">\n                            <td class=\"content\">\n                <p                        \n                                    style=\"color:#000000;font-size:16px;mso-line-height-rule:exactly;line-height:24px;font-family:Arial,sans-serif;text-align: center;\">\n                                    <a href=\"@{parameters('ENV_VAR_Text_AppURL (itd_ENV_VAR_Text_AppURL)')}\"\n                                        style=\"font-size:16px;mso-line-height-rule:exactly;line-height:24px;font-family:Arial,sans-serif;text-decoration:none;font-weight:bold;color:#000000;\">Click here to Open the Checklist App.</a>\n                                </p>          \n                            </td>\n                        </tr>\n                    </table>\n                </td>\n            </tr>\n        </table>\n\n        </td>\n        </tr>\n        <!--[if mso]>\n            </td></tr></table>\n            <!--<![endif]-->\n        </table>\n    </div>\n</body>\n\n</html>"
+        },
+        "Send_an_email_(V2)": {
+          "runAfter": {
+            "var_Subject": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4cd2b732-b341-47eb-8a6a-f9dd54b761a9"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_office365_1",
+              "operationId": "SendEmailV2",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+            },
+            "parameters": {
+              "emailMessage/To": "@variables('var_EmailAddresses')",
+              "emailMessage/Subject": "@variables('var_Subject')",
+              "emailMessage/Body": "<p>@{outputs('Compose')}</p>",
+              "emailMessage/Cc": "@triggerOutputs()?['body/Author/Email']",
+              "emailMessage/Importance": "Normal"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "var_Subject": {
+          "runAfter": {
+            "Compose": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b2953479-e324-40a7-b61d-fab489487e1d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "var_Subject",
+                "type": "string",
+                "value": "Employee Checklist - New Employee Added"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

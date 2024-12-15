@@ -1,0 +1,15 @@
+<environmentvariabledefinition schemaname="itd_shared_sharepointonline_ef748030ab834b56af5aeb8e9a75611e">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <displayname default="OIG Divisions-Offices">
+    <label description="OIG Divisions-Offices" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>table</parameterkey>
+  <parentdefinitionid>
+    <schemaname>itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d</schemaname>
+  </parentdefinitionid>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>
