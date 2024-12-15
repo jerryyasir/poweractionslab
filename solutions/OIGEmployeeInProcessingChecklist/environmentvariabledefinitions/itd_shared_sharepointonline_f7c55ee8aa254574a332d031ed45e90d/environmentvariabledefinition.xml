@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <defaultvalue>https://doj365.sharepoint.us/sites/OIG-Forms/ITD</defaultvalue>
+  <displayname default="ENV_VAR_SPO_ITD">
+    <label description="ENV_VAR_SPO_ITD" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>dataset</parameterkey>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

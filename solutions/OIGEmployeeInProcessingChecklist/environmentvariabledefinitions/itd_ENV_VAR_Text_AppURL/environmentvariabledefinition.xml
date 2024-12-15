@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="itd_ENV_VAR_Text_AppURL">
+  <defaultvalue>https://apps.high.powerapps.us/play/e/c482f3b7-135f-428e-8a3c-bf02bc95294d/a/0c3c0ab5-b57c-4fca-8962-768b9a51c517?tenantId=15ef12a1-af58-44c4-b029-712fc0605570&amp;hint=6a8c2752-720a-47ce-8f67-6c6abf5e7bee&amp;sourcetime=1719346793781</defaultvalue>
+  <displayname default="ENV_VAR_Text_AppURL">
+    <label description="ENV_VAR_Text_AppURL" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.3</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

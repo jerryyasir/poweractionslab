@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="itd_ENVVAREmployeeInProcessingCheckList">
+  <defaultvalue>Employees In-Processing CheckList</defaultvalue>
+  <displayname default="ENV_VAR_LIST_TEXT_EmployeeInProcessingCheckList">
+    <label description="ENV_VAR_LIST_TEXT_EmployeeInProcessingCheckList" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.3</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

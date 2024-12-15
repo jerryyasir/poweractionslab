@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>itd_employeeinprocessingchecklist_f6c1d</Name>
+  <AppVersion>2024-08-06T02:36:26Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.24062.17.0</CreatedByClientVersion>
+  <MinClientVersion>3.24062.17.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.24062.17","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20240627T125901Z-3.24062.17.0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>rgba(0, 78, 140, 1)</BackgroundColor>
+  <DisplayName>Employee In-Processing Checklist</DisplayName>
+  <Description></Description>
+  <CommitMessage></CommitMessage>
+  <Publisher></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"7db21187-eb3f-45cf-a5ff-ceeb32a72374":{"id":"/providers/microsoft.powerapps/apis/shared_sharepointonline","displayName":"SharePoint","iconUri":"https://connectoricons-prod.azureedge.net/u/jayawan/releases/v1.0.1697/1.0.1697.3786/sharepointonline/icon.png","dataSources":["EmployeeInProcessingCheckList","EIPSupervisors","EIPCheckList","SF Forms Lookups","EIPEmployeeNotes"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{"https://doj365.sharepoint.us/sites/OIG-Forms/ITD_itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d":{"datasetOverride":{"name":"https://doj365.sharepoint.us/sites/OIG-Forms/ITD","environmentVariableName":"itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d"},"dataSources":{"EmployeeInProcessingCheckList":{"tableName":"78bd6958-92f8-4d95-bc4a-a7cda83cd94a","tableNameOverride":{"name":"78bd6958-92f8-4d95-bc4a-a7cda83cd94a","environmentVariableName":"itd_shared_sharepointonline_112beddc77d24f78ae6062722ea691f6"}},"EIPSupervisors":{"tableName":"e7a07ab7-4ec9-425c-ac61-8a67c69e5f69","tableNameOverride":{"name":"e7a07ab7-4ec9-425c-ac61-8a67c69e5f69","environmentVariableName":"itd_shared_sharepointonline_780c9b6780854e90916ae995bc4e96ff"}},"EIPCheckList":{"tableName":"bb695b5f-d991-4281-9477-60d220876f91","tableNameOverride":{"name":"bb695b5f-d991-4281-9477-60d220876f91","environmentVariableName":"itd_shared_sharepointonline_48e3882405d446ecb23d270d1193f390"}},"EIPEmployeeNotes":{"tableName":"bc04c6da-2348-4aa2-b544-bb9f03dc7da7","tableNameOverride":{"name":"bc04c6da-2348-4aa2-b544-bb9f03dc7da7","environmentVariableName":"itd_shared_sharepointonline_d6856ca961094018b1871af409e33171"}}}},"https://doj365.sharepoint.us/sites/OIG-Forms_itd_shared_sharepointonline_5a875f53569c429c81d7c076aad28291":{"datasetOverride":{"name":"https://doj365.sharepoint.us/sites/OIG-Forms","environmentVariableName":"itd_shared_sharepointonline_5a875f53569c429c81d7c076aad28291"},"dataSources":{"SF Forms Lookups":{"tableName":"12730e72-4361-4c26-a5e1-59b69f753196","tableNameOverride":{"name":"12730e72-4361-4c26-a5e1-59b69f753196","environmentVariableName":"itd_shared_sharepointonline_f98efa974dc3482295ce7760ec565486"}}}}},"apiTier":"Standard","actions":["providers/PowerPlatform.Governance/Operations/Read","providers/PowerPlatform.Governance/Operations/Write"]}}</ConnectionReferences>
+  <DatabaseReferences>{}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"componenttype":380,"logicalname":"itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d","componenttypeplatformname":"EnvironmentVariableDefinition"},{"componenttype":380,"logicalname":"itd_shared_sharepointonline_5a875f53569c429c81d7c076aad28291","componenttypeplatformname":"EnvironmentVariableDefinition"},{"componenttype":380,"logicalname":"itd_shared_sharepointonline_112beddc77d24f78ae6062722ea691f6","componenttypeplatformname":"EnvironmentVariableDefinition"},{"componenttype":380,"logicalname":"itd_shared_sharepointonline_780c9b6780854e90916ae995bc4e96ff","componenttypeplatformname":"EnvironmentVariableDefinition"},{"componenttype":380,"logicalname":"itd_shared_sharepointonline_48e3882405d446ecb23d270d1193f390","componenttypeplatformname":"EnvironmentVariableDefinition"},{"componenttype":380,"logicalname":"itd_shared_sharepointonline_d6856ca961094018b1871af409e33171","componenttypeplatformname":"EnvironmentVariableDefinition"},{"componenttype":380,"logicalname":"itd_shared_sharepointonline_f98efa974dc3482295ce7760ec565486","componenttypeplatformname":"EnvironmentVariableDefinition"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/itd_employeeinprocessingchecklist_f6c1d_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/itd_employeeinprocessingchecklist_f6c1d_DocumentUri.msapp</DocumentUri>
+  <AdditionalUris>
+    <AdditionalUri>/CanvasApps/itd_employeeinprocessingchecklist_f6c1d_AdditionalUris0_identity.json</AdditionalUri>
+  </AdditionalUris>
+</CanvasApp>

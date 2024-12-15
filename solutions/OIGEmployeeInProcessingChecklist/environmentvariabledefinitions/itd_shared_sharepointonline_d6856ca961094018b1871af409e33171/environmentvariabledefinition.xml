@@ -1,0 +1,16 @@
+<environmentvariabledefinition schemaname="itd_shared_sharepointonline_d6856ca961094018b1871af409e33171">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <defaultvalue>bc04c6da-2348-4aa2-b544-bb9f03dc7da7</defaultvalue>
+  <displayname default="ENV_VAR_LIST_EIPEmployeeNotes">
+    <label description="ENV_VAR_LIST_EIPEmployeeNotes" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.3</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>table</parameterkey>
+  <parentdefinitionid>
+    <schemaname>itd_shared_sharepointonline_f7c55ee8aa254574a332d031ed45e90d</schemaname>
+  </parentdefinitionid>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>
